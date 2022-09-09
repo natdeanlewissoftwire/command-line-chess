@@ -25,7 +25,7 @@ def ask_for_move(game_board)
   piece_coords = get_row_and_col(piece_location)
   destination_coords = get_row_and_col(destination)
   piece = get_piece(game_board, piece_coords)
-  if validate_piece(piece) && validate_move(piece, destination_coords)
+  if validate_piece(piece) && validate_move(piece, piece_coords, destination_coords)
     return piece_coords, destination_coords
   else
     return ask_for_move(game_board)
@@ -37,11 +37,26 @@ def get_piece(game_board, piece_coords)
 end
 
 def validate_piece(piece)
-  true
+  if piece == " "
+    puts "There's no piece there!"
+    false
+  elsif $white_to_move != (piece.upcase == piece)
+    puts "That's not your piece!"
+    false
+  else
+    true
+  end
 end
 
-def validate_move(piece, destination_coords)
-  true
+def validate_move(piece, piece_coords, destination_coords)
+  case piece.upcase
+  when "R"
+  when "N"
+  when "B"
+  when "Q"
+  when "K"
+  when "P"
+  end
 end
 
 def make_move(piece_coords, destination_coords, game_board)
@@ -58,7 +73,7 @@ def get_row_and_col(location)
 end
 
 def play
-  white_to_move = true
+  $white_to_move = true
   game_over = false
   game_board = initial_board
   while (!game_over)
